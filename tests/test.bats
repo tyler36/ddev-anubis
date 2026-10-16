@@ -93,6 +93,26 @@ teardown() {
   fi
 }
 
+@test "Custom port can be set" {
+  set -eu -o pipefail
+
+  export TEST_ANUBIS_PORT="8123"
+  ddev dotenv set .ddev/.env.anubis --anubis-port=${TEST_ANUBIS_PORT}
+  run ddev restart -y
+
+  echo "# ddev add-on get ${DIR} with project ${PROJNAME} in $(pwd)" >&3
+  run ddev add-on get "${DIR}"
+  assert_success
+
+  # Check Traefik config contains the Anubis backend service.
+  run grep -Fq "${PROJNAME}-anubis-${TEST_ANUBIS_PORT}" .ddev/traefik/config/ddev-anubis.yaml
+  assert_success
+
+  run ddev restart -y
+  assert_success
+  health_checks
+}
+
 # bats test_tags=release
 @test "install from release" {
   set -eu -o pipefail
