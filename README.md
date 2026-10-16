@@ -45,6 +45,7 @@ All customization options (use with caution):
 | -------- | ---- | ------- |
 | `ANUBIS_DIFFICULTY` | `--anubis-difficulty` | `4` |
 | `ANUBIS_DOCKER_IMAGE` | `--anubis-docker-image` | `ghcr.io/techarohq/anubis:latest` |
+| `ANUBIS_OG_PASSTHROUGH` | `--anubis-og-passthrough` | `true` |
 | `ANUBIS_PORT` | `--anubis-port` | `8923` |
 
 ## Credits

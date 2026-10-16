@@ -15,6 +15,7 @@ services:
       BIND: "${ANUBIS_PORT:-:8923}"
       DIFFICULTY: "${ANUBIS_DIFFICULTY:-:4}"
       METRICS_BIND: ":9090"
+      OG_PASSTHROUGH: "${ANUBIS_OG_PASSTHROUGH:-true}"
       SERVE_ROBOTS_TXT: '0'
       TARGET: http://ddev-${DDEV_SITENAME}-web:80
     networks: [ default, ddev_default ]
