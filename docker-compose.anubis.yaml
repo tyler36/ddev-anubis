@@ -33,4 +33,4 @@ services:
       com.ddev.approot: ${DDEV_APPROOT}
     user: '${DDEV_UID}:${DDEV_GID}'
     expose:
-      - '${ANUBIS_PORT:-:8923}'
+      - '${ANUBIS_PORT:-8923}'
