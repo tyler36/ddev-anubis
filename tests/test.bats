@@ -28,6 +28,7 @@ setup() {
   export PROJNAME="test-$(basename "${GITHUB_REPO}")"
   mkdir -p "${HOME}/tmp"
   export TESTDIR="$(mktemp -d "${HOME}/tmp/${PROJNAME}.XXXXXX")"
+  cp "${DIR}/tests/testdata/index.php" "${TESTDIR}/index.php"
   export DDEV_NONINTERACTIVE=true
   export DDEV_NO_INSTRUMENTATION=true
   export CI=true
@@ -40,17 +41,11 @@ setup() {
 }
 
 health_checks() {
-  # Do something useful here that verifies the add-on
-
-  # You can check for specific information in headers:
-  # run curl -sfI https://${PROJNAME}.ddev.site
-  # assert_output --partial "HTTP/2 200"
-  # assert_output --partial "test_header"
-
-  # Or check if some command gives expected output:
-  DDEV_DEBUG=true run ddev launch
+  run curl -skI --max-time 10 "https://${PROJNAME}.ddev.site"
   assert_success
-  assert_output --partial "FULLURL https://${PROJNAME}.ddev.site"
+  # Assert the website is accessible.
+  assert_output --partial "HTTP/2 200"
+  assert_output --partial "test_header"
 }
 
 teardown() {
@@ -73,6 +68,29 @@ teardown() {
   run ddev restart -y
   assert_success
   health_checks
+}
+
+@test "routes requests through Anubis" {
+  set -eu -o pipefail
+
+  run ddev add-on get "${DIR}"
+  assert_success
+  run ddev restart -y
+  assert_success
+  health_checks
+
+  run docker stop "ddev-${PROJNAME}-anubis"
+  assert_success
+  run curl -skS --max-time 10 -o /dev/null -w '%{http_code}' "https://${PROJNAME}.ddev.site"
+  request_exit_status="$status"
+  response_code="$output"
+  run docker start "ddev-${PROJNAME}-anubis"
+  assert_success
+  assert_equal 0 "$request_exit_status"
+  if [[ ! "$response_code" =~ ^5[0-9]{2}$ ]]; then
+    printf "Expected a 5xx response with Anubis stopped, got %s\n" "$response_code" >&2
+    return 1
+  fi
 }
 
 # bats test_tags=release
