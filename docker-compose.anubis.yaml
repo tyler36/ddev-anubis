@@ -14,11 +14,17 @@ services:
     environment:
       BIND: "0.0.0.0:8923"
       DIFFICULTY: 4
-      METRICS_BIND: "0.0.0.0:9090"
+      METRICS_BIND: ":9090"
       SERVE_ROBOTS_TXT: '0'
       TARGET: http://ddev-${DDEV_SITENAME}-web:80
     networks: [ default, ddev_default ]
     restart: "no"
+    healthcheck:
+      test: [ "CMD", "anubis", "--healthcheck" ]
+      interval: 5s
+      timeout: 30s
+      retries: 5
+      start_period: 500ms
     # These labels ensure this service is discoverable by DDEV.
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
