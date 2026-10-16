@@ -22,10 +22,10 @@ After installation, make sure to commit the `.ddev` directory to version control
 
 ## Usage
 
-| Command | Description |
-| ------- | ----------- |
-| `ddev describe` | View service status and used ports for Anubis |
-| `ddev logs -s anubis` | Check Anubis logs |
+| Command               | Description                                   |
+| --------------------- | --------------------------------------------- |
+| `ddev describe`       | View service status and used ports for Anubis |
+| `ddev logs -s anubis` | Check Anubis logs                             |
 
 ## Advanced Customization
 
@@ -43,7 +43,12 @@ All customization options (use with caution):
 
 | Variable | Flag | Default |
 | -------- | ---- | ------- |
+| `ANUBIS_DIFFICULTY` | `--anubis-difficulty` | `4` |
 | `ANUBIS_DOCKER_IMAGE` | `--anubis-docker-image` | `ghcr.io/techarohq/anubis:latest` |
+| `ANUBIS_OG_PASSTHROUGH` | `--anubis-og-passthrough` | `true` |
+| `ANUBIS_OG_EXPIRY_TIME` | `--anubis-og-expiry-time` | `24h` |
+| `ANUBIS_PORT` | `--anubis-port` | `8080` |
+| `ANUBIS_SERVE_ROBOTS_TXT` | `--anubis-serve-robots-txt` | `true` |
 
 ## Credits
 

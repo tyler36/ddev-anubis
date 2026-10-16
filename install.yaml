@@ -8,6 +8,10 @@ post_install_actions:
   - |
     # Example script running after file copy
     echo "Updating Traefik routes"
+    if [ -n "${ANUBIS_PORT:-}" ]; then
+      echo "ANUBIS_PORT (${ANUBIS_PORT}) detected ..."
+      sed -i.bak "s/8080/${ANUBIS_PORT}/g" traefik/config/ddev-anubis.yaml && rm -f traefik/config/ddev-anubis.yaml.bak
+    fi
     sed -i.bak "s/DDEV_SITENAME/${DDEV_SITENAME}/g" traefik/config/ddev-anubis.yaml && rm -f traefik/config/ddev-anubis.yaml.bak
 
 ddev_version_constraint: '>= v1.24.10'

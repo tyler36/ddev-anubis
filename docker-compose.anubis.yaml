@@ -12,15 +12,17 @@ services:
       - .:/mnt/ddev_config
       - ddev-global-cache:/mnt/ddev-global-cache
     environment:
-      BIND: "0.0.0.0:8923"
-      DIFFICULTY: 4
-      METRICS_BIND: ":9090"
-      SERVE_ROBOTS_TXT: '0'
+      BIND: ':${ANUBIS_PORT:-8080}'
+      DIFFICULTY: '${ANUBIS_DIFFICULTY:-4}'
+      METRICS_BIND: ':9090'
+      OG_PASSTHROUGH: '${ANUBIS_OG_PASSTHROUGH:-true}'
+      OG_EXPIRY_TIME: '${ANUBIS_OG_EXPIRY_TIME:-24h}'
+      SERVE_ROBOTS_TXT: '${ANUBIS_SERVE_ROBOTS_TXT:-true}'
       TARGET: http://ddev-${DDEV_SITENAME}-web:80
-    networks: [ default, ddev_default ]
-    restart: "no"
+    networks: [default, ddev_default]
+    restart: 'no'
     healthcheck:
-      test: [ "CMD", "anubis", "--healthcheck" ]
+      test: ['CMD', 'anubis', '--healthcheck']
       interval: 5s
       timeout: 30s
       retries: 5
@@ -31,4 +33,4 @@ services:
       com.ddev.approot: ${DDEV_APPROOT}
     user: '${DDEV_UID}:${DDEV_GID}'
     expose:
-      - '8923'
+      - '${ANUBIS_PORT:-8080}'
