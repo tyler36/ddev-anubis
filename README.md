@@ -32,7 +32,7 @@ After installation, make sure to commit the `.ddev` directory to version control
 To change the Docker image:
 
 ```bash
-ddev dotenv set .ddev/.env.anubis --anubis-docker-image="ddev/ddev-utilities:latest"
+ddev dotenv set .ddev/.env.anubis --anubis-docker-image="ghcr.io/techarohq/anubis:latest"
 ddev add-on get tyler36/ddev-anubis
 ddev restart
 ```
@@ -43,7 +43,7 @@ All customization options (use with caution):
 
 | Variable | Flag | Default |
 | -------- | ---- | ------- |
-| `ANUBIS_DOCKER_IMAGE` | `--anubis-docker-image` | `ddev/ddev-utilities:latest` |
+| `ANUBIS_DOCKER_IMAGE` | `--anubis-docker-image` | `ghcr.io/techarohq/anubis:latest` |
 
 ## Credits
 
