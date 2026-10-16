@@ -48,6 +48,7 @@ All customization options (use with caution):
 | `ANUBIS_OG_PASSTHROUGH` | `--anubis-og-passthrough` | `true` |
 | `ANUBIS_OG_EXPIRY_TIME` | `--anubis-og-expiry-time` | `24h` |
 | `ANUBIS_PORT` | `--anubis-port` | `8923` |
+| `ANUBIS_SERVE_ROBOTS_TXT` | `--anubis-serve-robots-txt` | `true` |
 
 ## Credits
 

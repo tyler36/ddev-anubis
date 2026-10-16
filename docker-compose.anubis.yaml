@@ -17,7 +17,7 @@ services:
       METRICS_BIND: ":9090"
       OG_PASSTHROUGH: "${ANUBIS_OG_PASSTHROUGH:-true}"
       OG_EXPIRY_TIME: "${ANUBIS_OG_EXPIRY_TIME:-24h}"
-      SERVE_ROBOTS_TXT: '0'
+      SERVE_ROBOTS_TXT: '${ANUBIS_SERVE_ROBOTS_TXT:-true}'
       TARGET: http://ddev-${DDEV_SITENAME}-web:80
     networks: [ default, ddev_default ]
     restart: "no"
