@@ -10,7 +10,7 @@ post_install_actions:
     echo "Updating Traefik routes"
     if [ -n "${ANUBIS_PORT:-}" ]; then
       echo "ANUBIS_PORT (${ANUBIS_PORT}) detected ..."
-      sed -i.bak "s/8923/${ANUBIS_PORT}/g" traefik/config/ddev-anubis.yaml && rm -f traefik/config/ddev-anubis.yaml.bak
+      sed -i.bak "s/8080/${ANUBIS_PORT}/g" traefik/config/ddev-anubis.yaml && rm -f traefik/config/ddev-anubis.yaml.bak
     fi
     sed -i.bak "s/DDEV_SITENAME/${DDEV_SITENAME}/g" traefik/config/ddev-anubis.yaml && rm -f traefik/config/ddev-anubis.yaml.bak
 

@@ -8,13 +8,12 @@
 http:
   routers:
     DDEV_SITENAME-web-80-http:
-      service: "DDEV_SITENAME-anubis-8923"
+      service: 'DDEV_SITENAME-anubis-8080'
     DDEV_SITENAME-web-80-https:
-      service: "DDEV_SITENAME-anubis-8923"
-
+      service: 'DDEV_SITENAME-anubis-8080'
 
   services:
-    DDEV_SITENAME-anubis-8923:
+    DDEV_SITENAME-anubis-8080:
       loadbalancer:
         servers:
-          - url: http://ddev-DDEV_SITENAME-anubis:8923
+          - url: http://ddev-DDEV_SITENAME-anubis:8080
