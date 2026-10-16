@@ -1,0 +1,20 @@
+#ddev-generated
+
+# This file is maintained by "tyler36/ddev-anubis".
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file.
+# "DDEV SITENAME" is replaced with the value on in the post-install script.
+
+http:
+  routers:
+    DDEV_SITENAME-web-80-http:
+      service: "DDEV_SITENAME-anubis-8923"
+    DDEV_SITENAME-web-80-https:
+      service: "DDEV_SITENAME-anubis-8923"
+
+
+  services:
+    DDEV_SITENAME-anubis-8923:
+      loadbalancer:
+        servers:
+          - url: http://ddev-DDEV_SITENAME-anubis:8923

@@ -7,7 +7,9 @@
 
 ## Overview
 
-This add-on integrates Anubis into your [DDEV](https://ddev.com/) project.
+This add-on integrates [Anubis](https://anubis.techaro.lol/) into your [DDEV](https://ddev.com/) project. Anubis:
+
+> Weigh the soul of incoming HTTP requests to protect your website!
 
 ## Installation
 

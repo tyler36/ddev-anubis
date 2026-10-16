@@ -1,15 +1,28 @@
 #ddev-generated
+
+# This file is maintained by "tyler36/ddev-anubis".
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file.
+
 services:
   anubis:
+    image: ${ANUBIS_DOCKER_IMAGE:-ghcr.io/techarohq/anubis:latest}
     container_name: ddev-${DDEV_SITENAME}-anubis
-    image: ${ANUBIS_DOCKER_IMAGE:-ddev/ddev-utilities:latest}
-    command: ["sh", "-c", "trap exit TERM; sleep infinity & wait"]
+    volumes:
+      - .:/mnt/ddev_config
+      - ddev-global-cache:/mnt/ddev-global-cache
+    environment:
+      BIND: "0.0.0.0:8923"
+      DIFFICULTY: 4
+      METRICS_BIND: "0.0.0.0:9090"
+      SERVE_ROBOTS_TXT: '0'
+      TARGET: http://ddev-${DDEV_SITENAME}-web:80
+    networks: [ default, ddev_default ]
     restart: "no"
     # These labels ensure this service is discoverable by DDEV.
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: ${DDEV_APPROOT}
-
-    volumes:
-      - ".:/mnt/ddev_config"
-      - "ddev-global-cache:/mnt/ddev-global-cache"
+    user: '${DDEV_UID}:${DDEV_GID}'
+    expose:
+      - '8923'
