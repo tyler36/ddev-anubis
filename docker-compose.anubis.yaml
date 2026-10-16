@@ -13,7 +13,7 @@ services:
       - ddev-global-cache:/mnt/ddev-global-cache
     environment:
       BIND: "${ANUBIS_PORT:-:8923}"
-      DIFFICULTY: 4
+      DIFFICULTY: "${ANUBIS_DIFFICULTY:-:4}"
       METRICS_BIND: ":9090"
       SERVE_ROBOTS_TXT: '0'
       TARGET: http://ddev-${DDEV_SITENAME}-web:80

@@ -43,6 +43,7 @@ All customization options (use with caution):
 
 | Variable | Flag | Default |
 | -------- | ---- | ------- |
+| `ANUBIS_DIFFICULTY` | `--anubis-difficulty` | `4` |
 | `ANUBIS_DOCKER_IMAGE` | `--anubis-docker-image` | `ghcr.io/techarohq/anubis:latest` |
 | `ANUBIS_PORT` | `--anubis-port` | `8923` |
 
