@@ -13,7 +13,7 @@ services:
       - ddev-global-cache:/mnt/ddev-global-cache
     environment:
       BIND: "${ANUBIS_PORT:-:8923}"
-      DIFFICULTY: "${ANUBIS_DIFFICULTY:-:4}"
+      DIFFICULTY: "${ANUBIS_DIFFICULTY:-4}"
       METRICS_BIND: ":9090"
       OG_PASSTHROUGH: "${ANUBIS_OG_PASSTHROUGH:-true}"
       OG_EXPIRY_TIME: "${ANUBIS_OG_EXPIRY_TIME:-24h}"
@@ -33,4 +33,4 @@ services:
       com.ddev.approot: ${DDEV_APPROOT}
     user: '${DDEV_UID}:${DDEV_GID}'
     expose:
-      - '${ANUBIS_PORT:-8923}'
+      - '${ANUBIS_PORT:-:8923}'
