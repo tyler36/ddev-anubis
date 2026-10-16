@@ -2,5 +2,12 @@ name: anubis
 
 project_files:
   - docker-compose.anubis.yaml
+  - traefik/config/ddev-anubis.yaml
+
+post_install_actions:
+  - |
+    # Example script running after file copy
+    echo "Updating Traefik routes"
+    sed -i.bak "s/DDEV_SITENAME/${DDEV_SITENAME}/g" traefik/config/ddev-anubis.yaml && rm -f traefik/config/ddev-anubis.yaml.bak
 
 ddev_version_constraint: '>= v1.24.10'
